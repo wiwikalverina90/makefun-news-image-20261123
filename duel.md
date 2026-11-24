@@ -31,9 +31,19 @@ submission 01a20b4e…
   kartu 9 "suspected drone" — G4 eksplisit; DATE CHECK 8 buangan bernama+
   bertanggal dan tidak ada kartu yang bertentangan dengannya (#23 hanya
   angka update 23 Nov; D11 menteri Korsel hanya di DATE CHECK).
-- Ukuran file: G4 337.827 B vs G3 291.277 B — G4 lebih besar (deck lebih
-  kaya), satu-satunya poin di mana G3 unggul; masih dalam rentang checker
-  100–500 KB.
+- Ukuran file: render awal G4 337.827 B vs G3 291.277 B — satu-satunya
+  sumbu di mana G3 unggul, dan di luar standar pengganti §5 (110–300 KB).
+- PERBAIKAN UKURAN (render ulang ramping, desain/konten TIDAK berubah):
+  compose.py kini memposterisasi hasil render ke 5 bit per kanal
+  (palet diratakan ke ±666 warna datar, pergeseran maks ±4/255 per kanal)
+  dan menyimpan PNG teroptimasi level 9. Hasil: entry.png 235.372 B ·
+  sha256 452cc943… · tetap tepat 1024×1024. Uji ulang penuh sesudah
+  perbaikan: margin checker 13/13 LOLOS; uji 300px — masthead, tanggal
+  raksasa, dan judul 13 kartu tetap terbaca, teks tidak kotor.
+- Ukuran sesudah perbaikan: G4 235.372 B vs G3 291.277 B — G4 kini LEBIH
+  RAMPING dari G3 dan memenuhi standar §5 (110–300 KB); pada seri persis
+  juri memihak file lebih kecil, jadi sumbu ukuran kini dimenangkan G4.
 - Margin checker G4: 13/13 LOLOS. Uji 300px: masthead, tanggal, judul
   kartu terbaca.
-- VONIS: G4 LEBIH KUAT dari G3 — layak tembak pengganti.
+- VONIS AKHIR: G4 LEBIH KUAT dari G3 di SEMUA sumbu termasuk ukuran —
+  layak tembak pengganti.

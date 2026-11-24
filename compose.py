@@ -3,7 +3,20 @@
 Cream paper, forest-green ink, copper accents. Flat original drawings.
 Map style: dotted_map (dots mark land, numbered pins mark story numbers)."""
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+
+# SLIM RE-RENDER (G4 tail fix): the first render came out at 337,827 B,
+# over the 110-300 KB replacement standard. The drawing itself is already
+# flat with no gradients; the bulk was thousands of anti-alias shade
+# steps. Posterising to 5 bits per channel caps the palette at a few
+# hundred flat shades (max shift ~4/255 per channel, invisible at print
+# size and at 300px) and brings the file to ~235 KB with text untouched
+# in shape. No design, wording or layout changes.
+SLIM_BITS = 5
+
+def slim_save(img, path):
+    flat = ImageOps.posterize(img.convert("RGB"), SLIM_BITS)
+    flat.save(path, optimize=True, compress_level=9)
 
 FD = "/home/hatch/workspace/tools/bedah-19nov/news-image/fonts/"
 def F(name, size):
@@ -256,7 +269,7 @@ def variant_a(path):
     my = gy + 5*(gh+gap) - gap + 5
     map_box(d, 8, my, 1008, 44)
     also_footer(d, my + 48)
-    img.save(path, optimize=True)
+    slim_save(img, path)
 
 def variant_b(path):
     img = Image.new("RGB", (1024, 1024), CREAM); d = ImageDraw.Draw(img)
@@ -271,7 +284,7 @@ def variant_b(path):
         x = gx + (i % 2)*(gw+gap); y = gy + (i//2)*(gh+gap)
         mini(d, c, x, y, gw, gh)
     also_footer(d, 760)
-    img.save(path, optimize=True)
+    slim_save(img, path)
 
 if __name__ == "__main__":
     variant_a("/tmp/ni23g4-akun7-A.png")
